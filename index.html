@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Loader Example</title>
+</head>
+<body>
+	<div ng-app="loader.example">
+		<div ng-controller="a">Controller a has been {{status}}</div>
+		<div ng-controller="b">Controller b has been {{status}}</div>
+		<div ng-controller="c">Controller c has been {{status}}</div>
+		<div ng-controller="external">Controller external has been {{status}}</div>
+	</div>
+
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="/loader/loader.js"></script>
+	<script src="/loader/example/external_module.js"></script>
+	<script src="/loader/example/main.js"></script>
+</body>
+</html>

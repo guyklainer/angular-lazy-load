@@ -1,67 +1,161 @@
 
-( function( window, document ){
+( function( window, document, angular ){
 
-	var delegate 	= window.angular.module,
-		loaded 		= [];
+	window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
 
-	window.angular.lazyModule = function( name, requires, configFn ){
+	var appElement = document.querySelector("[ng-app]");
 
-		var deferred 	= new jQuery.Deferred(),
-			index		= 0;
+	var loaded 		= [],
+		toLoad		= [],
+		main		= false,
+		original 	= angular.module,
+		bootstrap 	= angular.bootstrap;
 
-		if( requires ){
+	var moduleTemplate = angular.module("loaderModuleExplorer", [] );
 
-			requires.forEach( function( require, i ){
-				var path = require.split( "/" );
+	if( appElement )
+		angular.forEach( appElement.attributes, function( attribute ){
+			if( attribute.nodeName == "ng-app" ||
+				attribute.nodeName == "ng:app" ||
+				attribute.nodeName == "data-ng-app" ||
+				attribute.nodeName == "x-ng-app" )
 
-				if( path.length > 1 ){
-					var pathStr = angular.root + require + ".js";
-					load( pathStr, function(){
-						loaded.push( require );
-						if( path[path.length-1] == path[path.length-2] )
-							path.splice( path.length-1, 1 );
+					main = attribute.value;
+		});
 
-						requires[i] = path.filter(function(a){return a != ""}).join( "." );
+	angular.bootstrap = function(){
+		var modules = arguments[1];
 
-						if( ++index == requires.length )
-							deferred.resolve( delegate.apply( this, [ name, requires, configFn ] ) );
-					});
+		main = modules[0];
 
-				} else
-					loaded.push(null);
-			});
-
-		} else
-			return delegate.apply( this, [ name, requires, configFn ] );
-
-		return deferred.promise();
+		bootstrap.apply( this, arguments );
 	};
 
-	function load( path, callback ){
+	angular.module = function( name, requires, configFn ){
+		return new Loader( name, requires, configFn, this );
+	};
+
+	function Loader( name, requires, configFn, context ){
+
+		this.deferred 	= new jQuery.Deferred();
+		this.requires 	= requires;
+		this.moduleArgs = arguments;
+		this.context 	= context;
+
+		Array.prototype.splice.call( this.moduleArgs, ( -1 ) );
+
+		if( main === false )
+			main = name;
+
+		if( requires && loaded.indexOf( name ) == -1 ){
+
+			if( requires.length == 0 )
+				return this.applyOriginal();
+
+			this.requires.forEach( this.requireHandler.bind( this ) );
+
+		} else
+			return this.applyOriginal();
+
+		return this.moduleWithPromise();
+	}
+
+	Loader.prototype.moduleWithPromise = function(){
+		var mock = {};
+
+		for( var key in moduleTemplate ){
+			if( moduleTemplate.hasOwnProperty( key ) ){
+
+				if( typeof moduleTemplate[key] == "function" )
+					mock[key] = this.decorateModule( key );
+				else
+					mock[key] = moduleTemplate[key];
+			}
+		}
+
+		return mock;
+	};
+
+	Loader.prototype.decorateModule = function( type ){
+		var self = this;
+
+		return function(){
+			var args 	= arguments,
+				promise	= self.deferred.promise();
+
+			promise.then( function( module ){
+				module[type].apply( this, args );
+
+				if( module.name == main )
+					angular.resumeBootstrap();
+			});
+		}
+	};
+
+	Loader.prototype.requireHandler = function( require, index ){
+
+		if( require.charAt( 0 ) == "/" )
+			this.load( require, index );
+
+		else if( loaded.indexOf( require ) == -1 )
+			loaded.push( require );
+
+	};
+
+	Loader.prototype.load = function( require, index ){
+		var self = this,
+			path = require.replace(".js", "" ).split( "/" );
+
+		path.splice( 0, 1 );
+
+		if( path[path.length-1] == path[path.length-2] )
+			path.splice( -1 );
+
 		// Adding the script tag to the head as suggested before
 		var head 	= document.getElementsByTagName('head')[0];
 		var script 	= document.createElement('script');
 
 		script.type = 'text/javascript';
-		script.src 	= path;
+		script.src 	= require;
+
+		require = path.join( "." );
+
+		toLoad.push( { context : this, params : [ require, index ] } );
 
 		// Then bind the event to the callback function.
 		// There are several events for cross browser compatibility.
-		script.onload = script.onreadystatechange = callback;
+		script.onload = script.onreadystatechange = function(){
+			var params = toLoad.pop();
+			self.scriptLoaded.apply( params.context, params.params );
+		};
+
 
 		// Fire the loading
 		head.appendChild(script);
-	}
+	};
 
-})( window, document );
+	Loader.prototype.scriptLoaded = function( moduleName, index ){
 
-angular.root = "js";
-var appPromise = angular.module("example", [
-	'ngReactGrid',
-	'ngSanitize',
-	'ui.select',
-	'ui.router',
-	"general",
-	"debug",
-	'/datahub/layout/layout'
-]);
+		loaded.push( moduleName );
+
+		this.moduleArgs[1][index] = moduleName;
+
+		if( this.isAllLoaded() )
+			this.deferred.resolve( this.applyOriginal() );
+	};
+
+	Loader.prototype.applyOriginal = function(){
+		return original.apply( this.context, this.moduleArgs );
+	};
+
+	Loader.prototype.isAllLoaded = function(){
+		for( var index in this.requires ){
+			if( this.requires.hasOwnProperty( index ) )
+				if( loaded.indexOf( this.requires[index] ) == -1 )
+					return false;
+		}
+
+		return true;
+	};
+
+})( window, document, angular );
