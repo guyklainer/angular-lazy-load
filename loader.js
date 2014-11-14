@@ -118,6 +118,9 @@
 		script.type = 'text/javascript';
 		script.src 	= require;
 
+		if( angular.lazyLoaderRoot && path.indexOf( angular.lazyLoaderRoot ) != -1 )
+			path.splice( 0, path.indexOf( angular.lazyLoaderRoot ) );
+
 		require = path.join( "." );
 
 		toLoad.push( { context : this, params : [ require, index ] } );

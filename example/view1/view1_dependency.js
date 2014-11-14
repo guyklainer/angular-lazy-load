@@ -1,7 +1,7 @@
 
 ( function( angular ){
 
-	var module = angular.module("loader.example.view1.view1_dependency", []);
+	var module = angular.module("example.view1.view1_dependency", []);
 
 	module.controller( "b", function( $scope ){
 		console.log( "view1_dep ctrl loaded" );

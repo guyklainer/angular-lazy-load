@@ -1,6 +1,6 @@
 ( function( angular ){
 
-	var module = angular.module("loader.example.view1", [
+	var module = angular.module( "example.view1", [
 		"external",
 		'/loader/example/view1/view1_dependency.js'
 	]);

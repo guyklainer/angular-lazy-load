@@ -1,6 +1,8 @@
 ( function( angular ){
 
-	var module = angular.module("loader.example", [
+	angular.lazyLoaderRoot = "example";
+
+	var module = angular.module( "example", [
 		'/loader/example/view1/view1.js'
 	]);
 
