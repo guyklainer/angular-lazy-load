@@ -35,6 +35,7 @@ and will create for us this module:
 
 If view1 also have dependencies that need to be fetched, this process will continue recursively
 
+
 Notes:
 -------
 paths like this : 
@@ -47,3 +48,21 @@ will create this module:
     example.view1
 
 lazyLoader will ignores duplicates in the end of the module name from the understanding that its probably root file in view1 folder
+
+
+Example
+----------
+For live demo, run the index.html file and dig in the example folder for code samples.
+
+To Do's
+-----------
+- Get rid of the jQuery dependency 
+    ( its there just for the Deferred object. Didn't had time to find another solution )
+
+
+Contribute
+------------
+You are more then welcome to fork and make this tool better.
+
+
+</br>
