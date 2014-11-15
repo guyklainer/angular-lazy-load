@@ -3,7 +3,8 @@
 
 	window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
 
-	var appElement = document.querySelector("[ng-app]");
+	var atts = [ "ng-app", "data-ng-app", "x-ng-app" ];
+
 
 	var loaded 		= [],
 		toLoad		= [],
@@ -13,15 +14,15 @@
 
 	var moduleTemplate = angular.module("loaderModuleExplorer", [] );
 
-	if( appElement )
-		angular.forEach( appElement.attributes, function( attribute ){
-			if( attribute.nodeName == "ng-app" ||
-				attribute.nodeName == "ng:app" ||
-				attribute.nodeName == "data-ng-app" ||
-				attribute.nodeName == "x-ng-app" )
+	angular.forEach( atts, function( attr ){
+		var appElement = angular.element( "[" + attr + "]" );
 
-					main = attribute.value;
-		});
+		if( appElement.length > 0 ){
+			main = appElement.attr( attr );
+
+			return false;
+		}
+	});
 
 	angular.bootstrap = function(){
 		var modules = arguments[1];
