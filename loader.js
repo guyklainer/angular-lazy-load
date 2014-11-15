@@ -3,14 +3,12 @@
 
 	window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
 
-	var atts = [ "ng-app", "data-ng-app", "x-ng-app" ];
-
-
 	var loaded 		= [],
 		toLoad		= [],
 		main		= false,
 		original 	= angular.module,
-		bootstrap 	= angular.bootstrap;
+		bootstrap 	= angular.bootstrap,
+		atts 		= [ "ng-app", "data-ng-app", "x-ng-app" ];
 
 	var moduleTemplate = angular.module("loaderModuleExplorer", [] );
 
