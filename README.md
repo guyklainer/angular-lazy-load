@@ -4,6 +4,8 @@ Lazy Loader For Angular Modules
 Insert script tag for your main module in your HTML.
 All the rest of your modules will be loaded automatically.
 
+[![Build Status](https://travis-ci.org/guyklainer/angular-lazy-load.svg?branch=master)](https://travis-ci.org/guyklainer/angular-lazy-load)
+
 Usage
 ---------
 If your main module is located at "public/js/main.js"
