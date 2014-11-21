@@ -15,15 +15,15 @@ insert this script tag to your HTML footer:
 
     <script src="/public/js/example/main.js"></script>
 
-Set our root to the app namespace:
-
-    angular.lazyLoaderRoot = "example";
-
 In you main.js file:</br>
     
     var module = angular.module("example", [
         '/public/js/example/view1.js'
     ]);
+
+our app namespace will be the name of the main module:
+
+    'example' in the example
 
 This will create for us module with the name:
 

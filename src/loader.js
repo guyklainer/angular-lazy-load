@@ -118,8 +118,11 @@
 		script.type = 'text/javascript';
 		script.src 	= require;
 
-		if( angular.lazyLoaderRoot && path[0] != angular.lazyLoaderRoot )
-				path.unshift( angular.lazyLoaderRoot );
+		if( path.indexOf( main ) != -1 )
+			path.splice( 0, path.indexOf( main ) );
+
+		else if( path[0] != main )
+			path.unshift( main );
 
 		require = path.join( "." );
 
