@@ -30,6 +30,6 @@
     "node": "^0.10"
   },
   "scripts": {
-    //"test": "gulp jshint karma:unit"
+
   }
 }
