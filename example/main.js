@@ -1,7 +1,7 @@
 ( function( angular ){
 
 	var module = angular.module( "example", [
-		'view1/view1.js'
+		'base/example/view1/view1.js'
 	]);
 
 	module.controller( "a", function( $scope ){
