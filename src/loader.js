@@ -1,4 +1,6 @@
 
+'use strict';
+
 ( function( window, document, angular ){
 
 	window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
