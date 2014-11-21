@@ -1,0 +1,35 @@
+{
+  "name": "angular-lazy-loader",
+  "description": "Angular Lazy Loader",
+  "version": "0.0.3",
+
+  "homepage": "https://github.com/guyklainer/angular-lazy-load",
+  "bugs": "https://github.com/guyklainer/angular-lazy-load/issues",
+  "author": {
+    "name": "Guy Klainer",
+    "email": "guyklainer@gmail.com",
+    "url": "https://github.com/guyklainer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guyklainer/angular-lazy-load.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-uglify": "^1.0.1",
+    "gulp-concat": "^2.4.2",
+    "gulp-watch": "^1.2.0"
+  },
+  "engines": {
+    "node": "^0.10"
+  },
+  "scripts": {
+    //"test": "gulp jshint karma:unit"
+  }
+}
