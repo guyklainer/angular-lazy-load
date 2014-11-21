@@ -17,7 +17,8 @@ module.exports = function(config) {
     files: [
       'https://code.jquery.com/jquery-1.11.0.min.js',
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js',
-      'src/test/**/*.spec.js',
+      '../test/bind-polyfill.js',
+      '../src/test/**/*.spec.js',
       'example/*.js',
       {pattern: 'example/*/*.js', included: false}
     ],

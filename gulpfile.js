@@ -17,7 +17,7 @@ gulp.task( 'uglify', function() {
 
 gulp.task('test', function() {
 	karma.start({
-		configFile: path.join(__dirname, 'karma.conf.js'),
+		configFile: path.join(__dirname, 'test/karma.conf.js'),
 		browsers: ['PhantomJS'],
 		singleRun: true
 	}, function(code) {
