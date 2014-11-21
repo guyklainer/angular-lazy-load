@@ -5,7 +5,7 @@ Insert script tag for your main module in your HTML.
 All the rest of your modules will be loaded automatically.
 
 [![Build Status](https://travis-ci.org/guyklainer/angular-lazy-load.svg?branch=master)](https://travis-ci.org/guyklainer/angular-lazy-load)
-[![devDependencies Status](https://david-dm.org/guyklainer/angular-lazy-load.png#info=devDependencies)](https://david-dm.org/guyklainer/angular-lazy-load.png)
+[![devDependency Status](https://david-dm.org/guyklainer/angular-lazy-load/dev-status.svg)](https://david-dm.org/guyklainer/angular-lazy-load#info=devDependencies)
 
 Usage
 ---------
