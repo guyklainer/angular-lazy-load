@@ -2,7 +2,7 @@
 
 	var module = angular.module( "example.view1", [
 		"external",
-		'/loader/example/view1/view1_dependency.js'
+		'view1/view1_dependency.js'
 	]);
 
 	module.controller( "c", function( $scope ){

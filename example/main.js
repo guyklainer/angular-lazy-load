@@ -3,7 +3,7 @@
 	angular.lazyLoaderRoot = "example";
 
 	var module = angular.module( "example", [
-		'/loader/example/view1/view1.js'
+		'view1/view1.js'
 	]);
 
 	module.controller( "a", function( $scope ){

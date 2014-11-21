@@ -93,7 +93,7 @@
 
 	Loader.prototype.requireHandler = function( require, index ){
 
-		if( require.charAt( 0 ) == "/" )
+		if( require.split("/").length > 1 )
 			this.load( require, index );
 
 		else if( loaded.indexOf( require ) == -1 )
@@ -105,7 +105,8 @@
 		var self = this,
 			path = require.replace(".js", "" ).split( "/" );
 
-		path.splice( 0, 1 );
+		if( require.charAt( 0 ) == "/" )
+			path.splice( 0, 1 );
 
 		if( path[path.length-1] == path[path.length-2] )
 			path.splice( -1 );
@@ -117,8 +118,8 @@
 		script.type = 'text/javascript';
 		script.src 	= require;
 
-		if( angular.lazyLoaderRoot && path.indexOf( angular.lazyLoaderRoot ) != -1 )
-			path.splice( 0, path.indexOf( angular.lazyLoaderRoot ) );
+		if( angular.lazyLoaderRoot && path[0] != angular.lazyLoaderRoot )
+				path.unshift( angular.lazyLoaderRoot );
 
 		require = path.join( "." );
 
