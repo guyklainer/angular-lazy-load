@@ -1,5 +1,6 @@
 Lazy Loader For Angular Modules
 =================================
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/guyklainer/angular-lazy-load?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Insert script tag for your main module in your HTML.
 All the rest of your modules will be loaded automatically.
