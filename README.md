@@ -7,6 +7,7 @@ All the rest of your modules will be loaded automatically.
 [![Build Status](https://travis-ci.org/guyklainer/angular-lazy-load.svg?branch=master)](https://travis-ci.org/guyklainer/angular-lazy-load)
 [![devDependency Status](https://david-dm.org/guyklainer/angular-lazy-load/dev-status.svg)](https://david-dm.org/guyklainer/angular-lazy-load#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/guyklainer/angular-lazy-load/badges/gpa.svg)](https://codeclimate.com/github/guyklainer/angular-lazy-load)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/guyklainer/angular-lazy-load?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Usage
 ---------
