@@ -15,10 +15,13 @@
 	var moduleTemplate = angular.module("loaderModuleExplorer", [] );
 
 	angular.forEach( atts, function( attr ){
-		var appElement = angular.element( "[" + attr + "]" );
+		var appElement = document.querySelectorAll( "[" + attr + "]" );
 
 		if( appElement.length > 0 ){
-			main = appElement.attr( attr );
+			angular.forEach( appElement[0].attributes, function( currAttr, index ){
+				if( currAttr.name == attr )
+					main = appElement[0].attributes[index].value;
+			});
 
 			return false;
 		}
@@ -38,7 +41,7 @@
 
 	function Loader( name, requires, configFn, context ){
 
-		this.deferred 	= new jQuery.Deferred();
+		this.deferred 	= angular.injector(['ng']).get("$q").defer();
 		this.requires 	= requires;
 		this.moduleArgs = arguments;
 		this.context 	= context;
@@ -82,7 +85,7 @@
 
 		return function(){
 			var args 	= arguments,
-				promise	= self.deferred.promise();
+				promise	= self.deferred.promise;
 
 			promise.then( function( module ){
 				module[type].apply( this, args );
