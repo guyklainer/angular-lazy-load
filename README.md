@@ -59,12 +59,6 @@ Example
 ----------
 For live demo, run the index.html file and dig in the example folder for code samples.
 
-To Do's
------------
-- Get rid of the jQuery dependency 
-    ( its there just for the Deferred object. Didn't had time to find another solution )
-
-
 Contribute
 ------------
 You are more then welcome to fork and make this tool better.
