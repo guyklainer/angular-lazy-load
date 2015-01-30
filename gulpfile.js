@@ -4,7 +4,7 @@ var gulp 	= require( 'gulp' ),
 	concat 	= require( 'gulp-concat'),
 	gutil 	= require( 'gulp-util' ),
 	path 	= require( 'path' ),
-	karma 	= require('karma').server;
+	karma 	= require('karma').server
 
 
 gulp.task( 'uglify', function() {
